@@ -8,6 +8,7 @@ image_url="https://cloud-images.ubuntu.com/oracular/current/"
 image_name="oracular-server-cloudimg-amd64.img"
 storage_name="local-lvm"
 
+set -e # exit script if any of following commans return non-zero result
 
 imageDownload () {
     # download image file from internet
