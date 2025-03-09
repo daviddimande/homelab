@@ -1,7 +1,7 @@
 #!/bin/bash
 # varibles declaration
 
-download_path="/temp"
+download_path="/tmp"
 vm_id=8000
 vm_memory_size=2048
 image_url="https://cloud-images.ubuntu.com/oracular/current/"
