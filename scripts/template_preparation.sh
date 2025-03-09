@@ -45,3 +45,12 @@ templateVM () {
     # convert VM as template
     qm template $vm_id
 }
+
+# call functions 
+imageDownload
+createVM
+importImage
+insertCD
+setBootOrder
+setConsole
+templateVM
