@@ -59,9 +59,11 @@ setConsole () {
     echo "#### done! ####" | logger -s -p local7.notice
 }
 resizeDisk () {
-    echo "### resizing disk ...### "
-    qm disk resize $vm_id scsi0 +20G
-    echo "### done! ###"
+    # disk resize 
+    
+    echo "### resizing disk ...### " | logger -s -p local7.notice
+    qm disk resize $vm_id scsi0 +20G | logger -s -p local7.notice
+    echo "### done! ###" | logger -s -p local7.notice
 }
 templateVM () {
     # convert VM as template
