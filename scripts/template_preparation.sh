@@ -78,4 +78,5 @@ importImage
 insertCD
 setBootOrder
 setConsole
+resizeDisk
 templateVM
