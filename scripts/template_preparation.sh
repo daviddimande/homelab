@@ -58,7 +58,11 @@ setConsole () {
     qm set $vm_id --serial0 socket --vga serial0 | logger -s -p local7.notice
     echo "#### done! ####" | logger -s -p local7.notice
 }
-
+resizeDisk () {
+    echo "### resizing disk ...### "
+    qm disk resize $vm_id scsi0 +20G
+    echo "### done! ###"
+}
 templateVM () {
     # convert VM as template
 
