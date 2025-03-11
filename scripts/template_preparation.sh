@@ -31,7 +31,7 @@ importImage () {
    #qm set $vm_id --scsi0 local-lvm:0,import-from=/path/to/bionic-server-cloudimg-amd64.img
 
    echo "#### importing image file ...####" | logger -s -p local7.notice
-   qm set $vm_id --scsi0 $storage_name:0,import-from=$download_path$image_name
+   qm set $vm_id --scsi0 $storage_name:0,import-from=$download_path/$image_name
    echo "#### done! ####" | logger -s -p local7.notice
 }
 
