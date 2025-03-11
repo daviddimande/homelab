@@ -4,7 +4,7 @@
 download_path="/tmp"
 vm_id=8000
 vm_memory_size=2048
-image_url="https://cloud-images.ubuntu.com/oracular/current/"
+image_url="https://cloud-images.ubuntu.com/oracular/current/oracular-server-cloudimg-amd64.img"
 image_name="oracular-server-cloudimg-amd64.img"
 storage_name="local-lvm"
 
