@@ -3,6 +3,7 @@
 
 download_path="/tmp"
 vm_id=8000
+vm_name=ubuntu-cloud
 vm_memory_size=2048
 image_url="https://cloud-images.ubuntu.com/oracular/current/oracular-server-cloudimg-amd64.img"
 image_name="oracular-server-cloudimg-amd64.img"
@@ -22,7 +23,7 @@ createVM () {
    # create a new VM with VirtIO SCSI controller
 
    echo "#### creating virtual machine ...####" | logger -s -p local7.notice
-   qm create $vm_id --memory $vm_memory_size --net0 virtio,bridge=vmbr0 --scsihw virtio-scsi-pci | logger -s -p local7.notice
+   qm create $vm_id --name $vm_name --memory $vm_memory_size --net0 virtio,bridge=vmbr0 --scsihw virtio-scsi-pci | logger -s -p local7.notice
    echo "#### done! ####" | logger -s -p local7.notice 
 }
 
