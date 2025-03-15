@@ -1,6 +1,6 @@
 ---
   - name: Install and cloudflared on pihole 
-    hosts: all
+    hosts: localhost
     become: yes
     gather_facts: yes
     tasks:
@@ -42,7 +42,7 @@
           src: ./cloudflared.service
           dest: /etc/systemd/system/cloudflared.service
 
-          
+
       - name: start cloudflared service
         service:
           name: cloudflared
