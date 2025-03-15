@@ -1,0 +1,51 @@
+---
+  - name: Install and cloudflared on pihole 
+    hosts: all
+    become: yes
+    gather_facts: yes
+    tasks:
+      - name: download cloudflared package
+        get_url:
+          url: https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
+          dest: /tmp/cloudflared-linux-amd64.deb
+          mode: '0755'
+      
+      - name: install cloudflared package
+        apt:
+          deb: /tmp/cloudflared-linux-amd64.deb
+      
+      - name: create cloudflared user
+        user:
+          name: cloudflared
+          state: present
+          create_home: no
+          shell: /usr/sbin/nologin
+          system: yes
+      
+      - name: copy and manage cloudflared ownership for config file
+        copy:
+          src: ./cloudflared
+          dest: /etc/default/cloudflared
+          owner: cloudflared
+          group: cloudflared
+          mode: '0700'
+      
+      - name: manage  cloudflared ownership for  binary
+        file:
+          path: /usr/local/bin/cloudflared
+          owner: cloudflared
+          group: cloudflared
+          mode: '0700'
+
+      - name: copy cloudflared service to systemd
+        copy: 
+          src: ./cloudflared.service
+          dest: /etc/systemd/system/cloudflared.service
+
+          
+      - name: start cloudflared service
+        service:
+          name: cloudflared
+          enabled: yes
+          state: started
+
