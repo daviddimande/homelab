@@ -14,7 +14,7 @@ provider "proxmox" {
   pm_api_token_secret = var.pm_api_token_secret
   pm_tls_insecure     = true # By default Proxmox Virtual Environment uses self-signed certificates.
   pm_debug            = true
-  pm_log_file         = "terraform-plugin-proxmox.log"
+  pm_log_file         = var.pm_log_file
   pm_timeout          = 300000
   pm_parallel         = 1
 
