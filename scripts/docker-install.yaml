@@ -1,0 +1,33 @@
+---
+  - name: install docker on ubuntu
+    hosts: ubuntu
+    become: yes
+    gather_facts: yes
+    remote_user: david
+    tasks:
+
+     - name: update repo cache
+       apt:
+         name:
+         - apt-transport-https
+         - ca-certificates
+         - curl
+         - software-properties-common
+         update_cache: true
+
+     - name: add docker gpg key
+       apt_key:
+         url: https://download.docker.com/linux/ubuntu/gpg
+         state: present
+
+     - name: add docker repository source
+       apt_repository:
+         repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+         state: present
+
+     - name: install docker community edition
+       apt:
+         name: docker-ce
+         state: present
+         update_cache: yes
+    
