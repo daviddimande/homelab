@@ -1,4 +1,3 @@
-
 resource "proxmox_vm_qemu" "Kubernetes_master" {
   count       = 2
   name        = "master-0${count.index + 1}"
@@ -40,8 +39,6 @@ resource "proxmox_vm_qemu" "Kubernetes_master" {
 
 }
 
-
-
 resource "proxmox_vm_qemu" "Kubernetes_node" {
   count       = 2
   name        = "node-0${count.index + 1}"
@@ -82,40 +79,11 @@ resource "proxmox_vm_qemu" "Kubernetes_node" {
 
 }
 
-
-
-resource "proxmox_lxc" "container-lxc" {
-  target_node  = var.target_node
-  hostname     = var.hostname
-  ostemplate   = var.ostemplate
-  password     = var.password
-  unprivileged = var.unprivileged
-  template     = var.template
-  swap         = var.swap
-  start        = var.start
-  protection   = var.protection
-  onboot       = var.onboot
-  memory       = var.memory
-  console      = var.console
-  description  = "my first container from terraform"
-  cores        = var.cores
-
-
-  features {
-    nesting = var.nesting
-  }
-
-  rootfs {
-    storage = var.storage
-    size    = var.container_size
-  }
-
-  network {
-    name   = var.net_name
-    bridge = var.bridge_type
-    ip     = var.ip
-    gw     = var.gw
-
-  }
+module "container-lxc" {
+  source              = "./modules/lxc/"
+  ip                  = "dhcp"
+  gw                  = var.gw
+  pm_api_token_id     = var.pm_api_token_id
+  pm_api_token_secret = var.pm_api_token_secret
+  pm_api_url          = var.pm_api_url
 }
-

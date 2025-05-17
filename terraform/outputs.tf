@@ -1,7 +1,7 @@
 output "ip" {
-  value = var.ip
+  value = module.container-lxc.ip
 }
 
 output "gateway" {
-  value = var.gw
+  value = module.container-lxc.gateway
 }
