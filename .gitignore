@@ -4,5 +4,5 @@ terraform/*.backup
 terraform/terraform.tfvars
 terraform/.terraform/*
 terraform/.terraform*
-terrafotm/*.log
+terraform/*.log
 *.tfplan
