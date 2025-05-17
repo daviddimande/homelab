@@ -80,7 +80,7 @@ resource "proxmox_vm_qemu" "Kubernetes_node" {
 }
 
 module "container-lxc" {
-  source              = "./modules/lxc/"
+  source              = "git::https://github.com/daviddimande/terraform-proxmox-lxc.git"
   ip                  = "dhcp"
   gw                  = var.gw
   pm_api_token_id     = var.pm_api_token_id
