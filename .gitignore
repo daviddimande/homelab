@@ -3,6 +3,5 @@ terraform/terraform.tfstate.backup
 terraform/*.backup
 terraform/terraform.tfvars
 terraform/.terraform/*
-terraform/.terraform*
 terraform/*.log
 *.tfplan
