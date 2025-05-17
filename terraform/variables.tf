@@ -253,3 +253,16 @@ variable "nesting" {
   description = "enable nesting"
 
 }
+
+
+variable "node_name" {
+  type        = string
+  default     = "node-0"
+  description = "node nome to be associated with resource"
+}
+
+variable "vm_counter" {
+  type        = number
+  default     = 2
+  description = "number of resources to be created"
+}
