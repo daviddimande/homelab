@@ -1,22 +1,114 @@
-terraform {
-  required_providers {
-    proxmox = {
-      source  = "Telmate/proxmox"
-      version = "3.0.1-rc6"
-    }
+
+resource "proxmox_vm_qemu" "Kubernetes_master" {
+  count       = 2
+  name        = "master-0${count.index + 1}"
+  target_node = var.target_node
+  vmid        = var.vmid
+  desc        = "master -${count.index + 1}"
+  bios        = var.bios
+  onboot      = var.onboot
+  vm_state    = var.vm_state
+  protection  = var.protection
+  tablet      = var.tablet
+  boot        = var.boot
+  clone       = var.clone
+  full_clone  = var.full_clone
+  memory      = var.memory
+  balloon     = var.balloon
+  sockets     = var.sockets
+  cores       = var.cores
+  cpu_type    = var.cpu_type
+  hotplug     = var.hotplug
+
+  disk {
+    slot    = var.disk_slot
+    type    = var.disk_type
+    size    = var.disk_size
+    storage = var.storage
   }
+
+  network {
+    id        = 0
+    model     = var.network_model
+    bridge    = var.network_bridge
+    link_down = var.link_down
+  }
+
 }
 
-provider "proxmox" {
-  # Configuration options
-  pm_api_url          = var.pm_api_url
-  pm_api_token_id     = var.pm_api_token_id
-  pm_api_token_secret = var.pm_api_token_secret
-  pm_tls_insecure     = true # By default Proxmox Virtual Environment uses self-signed certificates.
-  pm_debug            = true
-  pm_log_file         = var.pm_log_file
-  pm_timeout          = 300000
-  pm_parallel         = 1
 
+
+resource "proxmox_vm_qemu" "Kubernetes_node" {
+  count       = 2
+  name        = "node-0${count.index + 1}"
+  target_node = var.target_node
+  vmid        = var.vmid
+  desc        = "kubernetes node-${count.index + 1}"
+  bios        = var.bios
+  onboot      = var.onboot
+  vm_state    = var.vm_state
+  protection  = var.protection
+  tablet      = var.tablet
+  boot        = var.boot
+  clone       = var.clone
+  full_clone  = var.full_clone
+  memory      = var.memory
+  balloon     = var.balloon
+  sockets     = var.sockets
+  cores       = var.cores
+  cpu_type    = var.cpu_type
+  hotplug     = var.hotplug
+
+  disk {
+    slot    = var.disk_slot
+    type    = var.disk_type
+    size    = var.disk_size
+    storage = var.storage
+  }
+
+  network {
+    id        = 0
+    model     = var.network_model
+    bridge    = var.network_bridge
+    link_down = var.link_down
+  }
+
+}
+
+
+
+resource "proxmox_lxc" "container-lxc" {
+  target_node  = var.target_node
+  hostname     = var.hostname
+  ostemplate   = var.ostemplate
+  password     = var.password
+  unprivileged = var.unprivileged
+  template     = var.template
+  swap         = var.swap
+  start        = var.start
+  protection   = var.protection
+  onboot       = var.onboot
+  memory       = var.memory
+  console      = var.console
+  description  = "my first container from terraform"
+  cores        = var.cores
+
+
+  features {
+    nesting = var.nesting
+  }
+
+  rootfs {
+    storage = var.storage
+    size    = var.container_size
+  }
+
+  network {
+    name   = var.net_name
+    bridge = var.bridge_type
+    ip     = var.ip
+    gw     = var.gw
+
+  }
 }
 

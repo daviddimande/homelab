@@ -26,6 +26,7 @@ variable "target_node" {
   default     = "pve"
   description = "proxmox node where deployment will be done"
 }
+## ===================== VM variables ===================
 
 variable "vmid" {
   type        = number
@@ -157,4 +158,98 @@ variable "link_down" {
   type        = bool
   default     = false
   description = "define network interface status"
+}
+
+## ===================== container variables =====================
+
+
+variable "swap" {
+  type        = number
+  default     = 1024
+  description = "swap memory for VM and container"
+
+}
+
+variable "hostname" {
+  type        = string
+  default     = "my-container"
+  description = "hostname for container"
+}
+
+
+variable "ostemplate" {
+  type        = string
+  default     = "mbenga:vztmpl/ubuntu-24.10-standard_24.10-1_amd64.tar.zst"
+  description = "template loccation within proxmox VE"
+}
+
+variable "unprivileged" {
+  type        = bool
+  default     = true
+  description = "unprivileged setting for container"
+
+}
+
+variable "password" {
+  type        = string
+  default     = "YouPassHere(SecureOne)"
+  description = "password setting"
+  sensitive   = true
+
+}
+
+variable "ip" {
+  type        = string
+  description = "container ip address"
+}
+
+variable "gw" {
+  type        = string
+  description = "container gateway address"
+}
+
+variable "net_name" {
+  type        = string
+  default     = "eth0"
+  description = "network interface ID"
+}
+
+variable "bridge_type" {
+  type        = string
+  default     = "vmbr0"
+  description = "network bridge settings"
+
+}
+
+variable "container_size" {
+  type        = string
+  default     = "10G"
+  description = "disk size for container"
+}
+
+variable "start" {
+  type = bool
+  default = true
+  description = "start container after creation"
+}
+
+
+variable "template" {
+  type = bool
+  default = false
+  description = "create as template"
+}
+
+
+variable "console" {
+  type = bool
+  default = true
+  description = "enable container to container"
+}
+
+variable "nesting" {
+  type = bool
+  default = true
+  description = "enable nesting"
+
 }
