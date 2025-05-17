@@ -228,28 +228,28 @@ variable "container_size" {
 }
 
 variable "start" {
-  type = bool
-  default = true
+  type        = bool
+  default     = true
   description = "start container after creation"
 }
 
 
 variable "template" {
-  type = bool
-  default = false
+  type        = bool
+  default     = false
   description = "create as template"
 }
 
 
 variable "console" {
-  type = bool
-  default = true
+  type        = bool
+  default     = true
   description = "enable container to container"
 }
 
 variable "nesting" {
-  type = bool
-  default = true
+  type        = bool
+  default     = true
   description = "enable nesting"
 
 }

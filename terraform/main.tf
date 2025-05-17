@@ -15,10 +15,14 @@ resource "proxmox_vm_qemu" "Kubernetes_master" {
   full_clone  = var.full_clone
   memory      = var.memory
   balloon     = var.balloon
-  sockets     = var.sockets
-  cores       = var.cores
-  cpu_type    = var.cpu_type
   hotplug     = var.hotplug
+
+  cpu {
+    sockets = var.sockets
+    cores   = var.cores
+    type    = var.cpu_type
+
+  }
 
   disk {
     slot    = var.disk_slot
@@ -54,11 +58,14 @@ resource "proxmox_vm_qemu" "Kubernetes_node" {
   full_clone  = var.full_clone
   memory      = var.memory
   balloon     = var.balloon
-  sockets     = var.sockets
-  cores       = var.cores
-  cpu_type    = var.cpu_type
   hotplug     = var.hotplug
 
+  cpu {
+    sockets = var.sockets
+    cores   = var.cores
+    type    = var.cpu_type
+
+  }
   disk {
     slot    = var.disk_slot
     type    = var.disk_type
